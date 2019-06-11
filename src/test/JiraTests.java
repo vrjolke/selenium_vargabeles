@@ -25,8 +25,9 @@ public class JiraTests {
     }
 
     @Test
-    void login(){
-        Assert.assertEquals(1,1);
+    void testLogin(){
+        boolean hasLoggedIn = jiraTasks.login();
+        Assert.assertTrue(hasLoggedIn);
     }
 
 
