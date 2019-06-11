@@ -14,14 +14,12 @@ public class JiraTests {
 
     @BeforeAll
     static void init() {
-        System.setProperty("webdriver.chrome.driver", System.getenv("webdriverRoute"));
-        driver = new ChromeDriver();
         jiraTasks = new JiraTasks();
     }
 
     @AfterAll
     static void finish() {
-        driver.close();
+        JiraTasks.driver.close();
     }
 
     @Test

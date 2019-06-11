@@ -7,21 +7,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class JiraTasks {
-    static WebDriver driver;
+    public static WebDriver driver;
 
-    void init() {
+    public JiraTasks() {
         System.setProperty("webdriver.chrome.driver", System.getenv("webdriverRoute"));
         driver = new ChromeDriver();
     }
 
     public boolean login() {
-        init();
-        driver.navigate().to("https://www.jira.codecool.codecanvas.hu");
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-username")));
-        driver.findElement(By.id("login-form-username")).sendKeys(System.getenv("username"));
-        driver.findElement(By.id("login-form-password")).sendKeys(System.getenv("password"));
-        driver.findElement(By.id("login")).click();
-        return driver.findElement(By.id("header-details-user-fullname")) != null;
+        WebDriverWait wait = new WebDriverWait(JiraTasks.driver, 60);
+        JiraTasks.driver.navigate().to("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
+        JiraTasks.driver.findElement(By.id("login-form-username")).sendKeys(System.getenv("username"));
+        JiraTasks.driver.findElement(By.id("login-form-password")).sendKeys(System.getenv("password"));
+        JiraTasks.driver.findElement(By.id("login")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("header-details-user-fullname")));
+        return JiraTasks.driver.findElement(By.id("header-details-user-fullname")) != null;
     }
 }
