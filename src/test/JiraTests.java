@@ -23,6 +23,11 @@ public class JiraTests {
 
     @Test
     void testLogin() {
+        try{
+            jiraTasks.logout();
+        }catch (Exception e){
+            System.out.println("Logging out...");
+        }
         boolean hasLoggedIn = jiraTasks.login();
         Assert.assertTrue(hasLoggedIn);
     }
