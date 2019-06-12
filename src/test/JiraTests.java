@@ -18,7 +18,7 @@ public class JiraTests {
 
     @AfterAll
     static void finish() {
-        JiraTasks.driver.close();
+        jiraTasks.getDriver().close();
     }
 
     @Test
