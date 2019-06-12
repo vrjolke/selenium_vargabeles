@@ -1,9 +1,9 @@
 import com.codecool.vargabeles.JiraTasks;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class JiraTests {
@@ -22,16 +22,56 @@ public class JiraTests {
     }
 
     @Test
+    @Tag("login")
     void testLogin() {
+        if (jiraTasks.isLoggedIn()) {
+            jiraTasks.logout();
+        }
         boolean hasLoggedIn = jiraTasks.login();
         Assert.assertTrue(hasLoggedIn);
     }
 
+    @Test
+    @Tag("login")
+    void testLoginWithEmptyCredentials() {
+        if (jiraTasks.isLoggedIn()) {
+            jiraTasks.logout();
+        }
+        boolean hasLoggedIn = jiraTasks.loginWithEmptyCredentials();
+
+        assertEquals(false, hasLoggedIn);
+        assertEquals("Sorry, your username and password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
+    }
 
     @Test
     void testLogout() {
         boolean hasLoggedIn = jiraTasks.logout();
         Assert.assertTrue(hasLoggedIn);
     }
+
+    @Test
+    @Tag("browseIssue")
+    void testIssueIsAvailable() {
+        assertEquals(true, jiraTasks.issueIsAvailable("SAND-40"));
+    }
+
+    @Test
+    @Tag("browseIssue")
+    void testProjectJetiHasThreeIssues(){
+        assertEquals(true, jiraTasks.projectHasNIssues("JETI", 3));
+    }
+
+    @Test
+    @Tag("browseIssue")
+    void testProjectToucanHasThreeIssues(){
+        assertEquals(true, jiraTasks.projectHasNIssues("TOUCAN", 3));
+    }
+
+    @Test
+    @Tag("browseIssue")
+    void testProjectCoalaHasThreeIssues(){
+        assertEquals(true, jiraTasks.projectHasNIssues("COALA", 3));
+    }
+
 
 }
