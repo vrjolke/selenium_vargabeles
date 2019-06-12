@@ -38,4 +38,25 @@ public class JiraTasks {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")));
         return driver.findElement(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")) != null;
     }
+
+    public boolean categorizeIssues() {
+        login();
+        driver.findElement(By.id("browse-link")).click();
+        driver.findElement(By.id("project_all_link_lnk")).click();
+        driver.findElement(By.xpath("//*[@id=\"projects\"]/div/table/tbody/tr[6]/td[1]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/div/div[1]/nav/div/div[2]/ul/li[6]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"components-add__component\"]/div[1]/input")).sendKeys("test");
+        driver.findElement(By.xpath("//*[@id=\"components-add__component\"]/div[3]/input")).sendKeys("test");
+        driver.findElement(By.id("assigneeType-field")).sendKeys("Project lead (Administrator)");
+        driver.findElement(By.xpath("//*[@id=\"components-add__component\"]/div[5]/button")).click();
+        driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/div/div[1]/nav/div/div[2]/ul/li[5]/a")).click();
+        driver.findElement(By.xpath("")).click();
+        driver.findElement(By.xpath("//*[@id=\"edit-issue\"]/span[2]")).click();
+        driver.findElement(By.xpath("//*[@id=\"edit-issue\"]/span[2]")).click();
+        driver.findElement(By.xpath("//*[@id=\"edit-issue\"]/span[2]")).click();
+        driver.findElement(By.xpath("//*[@id=\"edit-issue\"]/span[2]")).click();
+
+        logout();
+        return true;
+    }
 }
