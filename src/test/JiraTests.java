@@ -21,7 +21,7 @@ public class JiraTests {
         jiraTasks.getDriver().close();
     }
 
-    @Test
+    /*@Test
     void testLogin() {
         boolean hasLoggedIn = jiraTasks.login();
         Assert.assertTrue(hasLoggedIn);
@@ -32,6 +32,14 @@ public class JiraTests {
     void testLogout() {
         boolean hasLoggedIn = jiraTasks.logout();
         Assert.assertTrue(hasLoggedIn);
+    }*/
+
+    @Test
+    void testCreateNewVersion() throws InterruptedException {
+        boolean versionIsCreated = jiraTasks.createNewVersion();
+        Assert.assertTrue(versionIsCreated);
     }
+
+
 
 }
