@@ -1,6 +1,8 @@
 import com.codecool.vargabeles.JiraTasks;
 import org.junit.Assert;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -20,16 +22,26 @@ public class JiraTests {
     }
 
     @Test
+    @Tag("login")
     void testLogin() {
-        try{
+        if (jiraTasks.isLoggedIn()) {
             jiraTasks.logout();
-        }catch (Exception e){
-            System.out.println("Logging out...");
         }
         boolean hasLoggedIn = jiraTasks.login();
         Assert.assertTrue(hasLoggedIn);
     }
 
+    @Test
+    @Tag("login")
+    void testLoginWithEmptyCredentials() {
+        if (jiraTasks.isLoggedIn()) {
+            jiraTasks.logout();
+        }
+        boolean hasLoggedIn = jiraTasks.loginWithEmptyCredentials();
+
+        assertEquals(false, hasLoggedIn);
+        assertEquals("Sorry, your username and password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
+    }
 
     @Test
     void testLogout() {
