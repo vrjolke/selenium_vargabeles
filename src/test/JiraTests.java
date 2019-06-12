@@ -1,9 +1,7 @@
 import com.codecool.vargabeles.JiraTasks;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class JiraTests {
@@ -33,5 +31,30 @@ public class JiraTests {
         boolean hasLoggedIn = jiraTasks.logout();
         Assert.assertTrue(hasLoggedIn);
     }
+
+    @Test
+    @Tag("browseIssue")
+    void testIssueIsAvailable() {
+        assertEquals(true, jiraTasks.issueIsAvailable("SAND-40"));
+    }
+
+    @Test
+    @Tag("browseIssue")
+    void testProjectJetiHasThreeIssues(){
+        assertEquals(true, jiraTasks.projectHasNIssues("JETI", 3));
+    }
+
+    @Test
+    @Tag("browseIssue")
+    void testProjectToucanHasThreeIssues(){
+        assertEquals(true, jiraTasks.projectHasNIssues("TOUCAN", 3));
+    }
+
+    @Test
+    @Tag("browseIssue")
+    void testProjectCoalaHasThreeIssues(){
+        assertEquals(true, jiraTasks.projectHasNIssues("COALA", 3));
+    }
+
 
 }

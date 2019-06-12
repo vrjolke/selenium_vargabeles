@@ -32,16 +32,36 @@ public class JiraTasks {
         return driver.findElement(By.id("header-details-user-fullname")) != null;
     }
 
-
     public boolean logout() {
+        loginfNotLoggedIn();
+        driver.findElement(By.id("header-details-user-fullname")).click();
+        driver.findElement(By.id("log_out")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")));
+        return driver.findElement(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")) != null;
+    }
+
+    public boolean issueIsAvailable(String issueName) {
+        loginfNotLoggedIn();
+        driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/" + issueName);
+        return driver.findElement(By.id("summary-val")).isDisplayed();
+    }
+
+    private void loginfNotLoggedIn() {
         try {
             driver.findElement(By.id("header-details-user-fullname")).isDisplayed();
         } catch (Exception e) {
             login();
         }
-        driver.findElement(By.id("header-details-user-fullname")).click();
-        driver.findElement(By.id("log_out")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")));
-        return driver.findElement(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")) != null;
+    }
+
+    public boolean projectHasNIssues(String projectname, int issues) {
+        loginfNotLoggedIn();
+        for (int i = 1; i <= issues; i++) {
+            boolean issueExists = issueIsAvailable(projectname + "-" + i);
+            if (!issueExists) {
+                return false;
+            }
+        }
+        return true;
     }
 }
