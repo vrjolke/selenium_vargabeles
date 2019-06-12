@@ -34,4 +34,10 @@ public class JiraTests {
         Assert.assertTrue(hasLoggedIn);
     }
 
+    @Test
+    void testCreateIssue() {
+        boolean fasza = jiraTasks.createIssue();
+        Assert.assertTrue(fasza);
+
+    }
 }
