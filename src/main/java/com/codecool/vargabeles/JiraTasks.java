@@ -19,6 +19,7 @@ public class JiraTasks {
     public JiraTasks() {
         System.setProperty("webdriver.chrome.driver", System.getenv("webdriverRoute"));
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 60);
     }
 
