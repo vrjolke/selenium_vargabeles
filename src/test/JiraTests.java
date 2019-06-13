@@ -1,6 +1,9 @@
 import com.codecool.vargabeles.JiraTasks;
 import org.junit.Assert;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,39 +61,38 @@ public class JiraTests {
 
     @Test
     @Tag("browseIssue")
-    void testProjectJetiHasThreeIssues(){
+    void testProjectJetiHasThreeIssues() {
         assertEquals(true, jiraTasks.projectHasNIssues("JETI", 3));
     }
 
     @Test
     @Tag("browseIssue")
-    void testProjectToucanHasThreeIssues(){
+    void testProjectToucanHasThreeIssues() {
         assertEquals(true, jiraTasks.projectHasNIssues("TOUCAN", 3));
     }
 
     @Test
     @Tag("browseIssue")
-    void testProjectCoalaHasThreeIssues(){
+    void testProjectCoalaHasThreeIssues() {
         assertEquals(true, jiraTasks.projectHasNIssues("COALA", 3));
     }
 
 
     @Test
     @Tag("permissionWithGlass")
-    void testCheckPermission(){
+    void testCheckPermission() throws InterruptedException {
         assertEquals(3, jiraTasks.checkPermissions().size());
     }
 
     @Test
     @Tag("permissionWithGlass")
-    void testCheckPermissionWithGlass(){
+    void testCheckPermissionWithGlass() throws InterruptedException{
         assertEquals(3, jiraTasks.checkPermissionsWithGlass().size());
     }
 
     @Test
     @Tag("permissionWithGlass")
-    void testComparePermission(){
-        assertTrue(jiraTasks.checkPermissions().equals(jiraTasks.checkPermissionsWithGlass()));
+    void testComparePermission() throws InterruptedException{
+        assertEquals(jiraTasks.checkPermissions(), jiraTasks.checkPermissionsWithGlass());
     }
-
 }
