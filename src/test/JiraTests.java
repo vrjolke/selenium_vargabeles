@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class JiraTests {
@@ -73,5 +74,23 @@ public class JiraTests {
         assertEquals(true, jiraTasks.projectHasNIssues("COALA", 3));
     }
 
+
+    @Test
+    @Tag("permissionWithGlass")
+    void testCheckPermission(){
+        assertEquals(3, jiraTasks.checkPermissions().size());
+    }
+
+    @Test
+    @Tag("permissionWithGlass")
+    void testCheckPermissionWithGlass(){
+        assertEquals(3, jiraTasks.checkPermissionsWithGlass().size());
+    }
+
+    @Test
+    @Tag("permissionWithGlass")
+    void testComparePermission(){
+        assertTrue(jiraTasks.checkPermissions().equals(jiraTasks.checkPermissionsWithGlass()));
+    }
 
 }
