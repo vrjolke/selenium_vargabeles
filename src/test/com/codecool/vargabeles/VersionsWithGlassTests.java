@@ -1,10 +1,25 @@
-import com.codecool.vargabeles.VersionsWithGlass;
+package com.codecool.vargabeles;
+
 import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class VersionsWithGlassTests extends JiraTests{
+class VersionsWithGlassTests extends JiraTests {
 
-    private VersionsWithGlass versionsWithGlass = new VersionsWithGlass();
+    private VersionsWithGlass versionsWithGlass;
+
+    @BeforeEach
+    void newDriver(){
+        versionsWithGlass = new VersionsWithGlass();
+        versionsWithGlass.login();
+    }
+
+    @AfterEach
+    void finish() {
+        versionsWithGlass.getDriver().close();
+
+    }
 
     @Test
     void testCreateNewVersion() throws InterruptedException {

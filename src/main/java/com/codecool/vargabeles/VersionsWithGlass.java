@@ -2,9 +2,10 @@ package com.codecool.vargabeles;
 
 import org.openqa.selenium.By;
 
-public class VersionsWithGlass extends JiraTasks{
+class VersionsWithGlass extends JiraTasks{
 
-    public boolean createNewVersion() {
+
+    boolean createNewVersion() {
         boolean newVersionIsVisibleInGlass = false;
         try {
             driver.findElement(By.id("header-details-user-fullname")).isDisplayed();
@@ -35,9 +36,10 @@ public class VersionsWithGlass extends JiraTasks{
         return newVersionIsVisibleInGlass;
     }
 
-    public boolean deleteNewVersion() throws InterruptedException{
+    boolean deleteNewVersion() throws InterruptedException{
         driver.navigate().to("https://jira.codecool.codecanvas.hu/projects/PP3/summary");
         driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/div/div[1]/nav/div/div[2]/ul/li[3]/a")).click();
+        Thread.sleep(500);
         String link = driver.findElement(By.xpath("//*[text()='2.0.1']")).getAttribute("href");
         String subLink = link.substring(link.length()-5);
         driver.findElement(By.id("version-filter-text")).click();
@@ -52,7 +54,7 @@ public class VersionsWithGlass extends JiraTasks{
         return true;
     }
 
-    public boolean connectIssueToVersion() throws InterruptedException {
+    boolean connectIssueToVersion() throws InterruptedException {
         driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/div/div[1]/nav/div/div[2]/ul/li[5]/a/span[1]")).click();
         driver.findElement(By.xpath("//*[text()='TestConnectIssueToVersion']")).click();
         Thread.sleep(500);

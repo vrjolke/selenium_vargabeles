@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LoginTests extends JiraTests{
+class LoginTests extends JiraTests{
 
     @Test
     void testLogin() {
@@ -17,8 +17,7 @@ public class LoginTests extends JiraTests{
         Assert.assertTrue(hasLoggedIn);
     }
 
-
-    @Test
+   @Test
    void testLoginWithEmptyCredentials() {
         if (jiraTasks.isLoggedIn()) {
             jiraTasks.logout();
@@ -26,7 +25,7 @@ public class LoginTests extends JiraTests{
 
         jiraTasks.loginWithWrongCredentials("", "");
 
-        assertEquals("Sorry, your username and password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
+        assertEquals("Sorry, your username or password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
     }
 
     @Test
@@ -36,6 +35,6 @@ public class LoginTests extends JiraTests{
         }
         jiraTasks.loginWithWrongCredentials(System.getenv("username"), "asd");
 
-        assertEquals("Sorry, your username and password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
+        assertEquals("Sorry, your username or password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
     }
 }

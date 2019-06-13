@@ -2,7 +2,7 @@ package com.codecool.vargabeles;
 
 import org.junit.jupiter.api.*;
 
-public class JiraTests {
+class JiraTests {
 
     static JiraTasks jiraTasks;
 

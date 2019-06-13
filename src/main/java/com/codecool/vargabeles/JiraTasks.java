@@ -9,21 +9,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class JiraTasks {
 
-    private WebDriver driver;
+    WebDriver driver;
     private WebDriverWait wait;
 
-    public WebDriver getDriver() {
+    WebDriver getDriver() {
         return driver;
     }
 
-    public JiraTasks() {
+    JiraTasks() {
         System.setProperty("webdriver.chrome.driver", System.getenv("webdriverRoute"));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 5);
     }
 
-    public boolean isLoggedIn(){
+    boolean isLoggedIn(){
         try{
             driver.findElement(By.id("header-details-user-fullname")).isDisplayed();
         }catch(NoSuchElementException e){
@@ -40,7 +40,7 @@ public class JiraTasks {
         }
     }
 
-    public boolean login() {
+    boolean login() {
         driver.navigate().to("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-username")));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-password")));
@@ -51,7 +51,7 @@ public class JiraTasks {
         return isLoggedIn();
     }
 
-    public boolean loginWithWrongCredentials(String username, String password){
+    boolean loginWithWrongCredentials(String username, String password){
         driver.navigate().to("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-username")));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-password")));
@@ -62,7 +62,7 @@ public class JiraTasks {
         return isLoggedIn();
     }
 
-    public boolean logout() {
+    boolean logout() {
 //        loginIfNotLoggedIn();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("header-details-user-fullname")));
         driver.findElement(By.id("header-details-user-fullname")).click();
@@ -71,13 +71,13 @@ public class JiraTasks {
         return driver.findElement(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")) != null;
     }
 
-    public boolean issueIsAvailable(String issueName) {
+    boolean issueIsAvailable(String issueName) {
 //        loginIfNotLoggedIn();
         driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/" + issueName);
         return driver.findElement(By.id("summary-val")).isDisplayed();
     }
 
-    public boolean projectHasNIssues(String projectname, int issues) {
+    boolean projectHasNIssues(String projectname, int issues) {
 //        loginIfNotLoggedIn();
         for (int i = 1; i <= issues; i++) {
             boolean issueExists = issueIsAvailable(projectname + "-" + i);
