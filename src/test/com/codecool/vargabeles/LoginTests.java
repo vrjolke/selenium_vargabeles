@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LoginTests extends JiraTests{
+class LoginTests extends JiraTests{
 
     @Test
     void testLogin() {
@@ -17,8 +17,7 @@ public class LoginTests extends JiraTests{
         Assert.assertTrue(hasLoggedIn);
     }
 
-
-    @Test
+   @Test
    void testLoginWithEmptyCredentials() {
         if (jiraTasks.isLoggedIn()) {
             jiraTasks.logout();
