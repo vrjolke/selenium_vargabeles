@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 public class ComponentsWithGlass extends JiraTasks {
 
     public int categorizeIssues() throws InterruptedException {
-        login();
         driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/PP3");
         Thread.sleep(500);
 
