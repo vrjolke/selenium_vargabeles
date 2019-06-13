@@ -10,8 +10,6 @@ class EditIssueTests extends JiraTests {
         boolean issueChanged = jiraTasks.editIssue();
         Assert.assertTrue(issueChanged);
         jiraTasks.restoreEditIssue();
-        finish();
-        init();
     }
 
     @Test
@@ -19,7 +17,7 @@ class EditIssueTests extends JiraTests {
         boolean issueChanged = jiraTasks.editIssueOnTheIssuePage("task-1");
         Assert.assertTrue(issueChanged);
         finish();
-        init();
+        newDriver();
         jiraTasks.editIssueOnTheIssuePage("story-1");
     }
 }

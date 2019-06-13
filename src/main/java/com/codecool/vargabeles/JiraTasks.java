@@ -72,7 +72,6 @@ public class JiraTasks {
     }
 
     public boolean editIssue() {
-        login();
         driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/SAND-1");
         driver.findElement(By.id("edit-issue")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit-issue-dialog")));
@@ -90,7 +89,6 @@ public class JiraTasks {
     }
 
     public boolean editIssueOnTheIssuePage(String issueType) {
-        login();
         driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/SAND-25");
         driver.findElement(By.id("type-val")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("issuetype-single-select")));
