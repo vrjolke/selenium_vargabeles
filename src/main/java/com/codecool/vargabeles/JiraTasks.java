@@ -32,14 +32,6 @@ public class JiraTasks {
         return true;
     }
 
-    public void loginIfNotLoggedIn() {
-        try {
-            driver.findElement(By.id("header-details-user-fullname")).isDisplayed();
-        } catch (Exception e) {
-            login();
-        }
-    }
-
     public boolean login() {
         driver.navigate().to("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-username")));
@@ -63,7 +55,6 @@ public class JiraTasks {
     }
 
     public boolean logout() {
-//        loginIfNotLoggedIn();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("header-details-user-fullname")));
         driver.findElement(By.id("header-details-user-fullname")).click();
         driver.findElement(By.id("log_out")).click();
@@ -72,13 +63,11 @@ public class JiraTasks {
     }
 
     public boolean issueIsAvailable(String issueName) {
-//        loginIfNotLoggedIn();
         driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/" + issueName);
         return driver.findElement(By.id("summary-val")).isDisplayed();
     }
 
     public boolean projectHasNIssues(String projectname, int issues) {
-//        loginIfNotLoggedIn();
         for (int i = 1; i <= issues; i++) {
             boolean issueExists = issueIsAvailable(projectname + "-" + i);
             if (!issueExists) {
@@ -86,5 +75,11 @@ public class JiraTasks {
             }
         }
         return true;
+    }
+
+    public boolean projectIsAvailable(String projectName){
+        driver.navigate().to("https://jira.codecool.codecanvas.hu/projects/"+projectName);
+        String pageTitle = driver.getTitle();
+        return !pageTitle.contains("Project not found");
     }
 }
