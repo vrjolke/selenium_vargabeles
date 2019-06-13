@@ -1,22 +1,21 @@
 package com.codecool.vargabeles;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 class JiraTests {
 
     static JiraTasks jiraTasks;
 
-    @BeforeAll
-    static void init() {
+    @BeforeEach
+    void newDriver(){
         jiraTasks = new JiraTasks();
+        jiraTasks.login();
     }
 
-
-    @AfterAll
-    static void finish() {
+    @AfterEach
+    void finish() {
         jiraTasks.getDriver().close();
-    }
 
+    }
 }
