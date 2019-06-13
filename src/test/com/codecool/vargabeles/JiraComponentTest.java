@@ -24,7 +24,7 @@ class JiraComponentTest {
     }
 
     @Test
-    void testComponent(){
+    void testComponent() throws InterruptedException{
         int result = jiraTasks.categorizeIssues();
         Assert.assertEquals(result, 1);
         jiraTasks.clearCategorizeIssues();
