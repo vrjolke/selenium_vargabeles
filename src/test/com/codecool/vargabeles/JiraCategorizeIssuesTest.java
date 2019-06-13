@@ -1,11 +1,14 @@
-import com.codecool.vargabeles.JiraTasks;
+package com.codecool.vargabeles;
+
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 
-public class JiraTests {
+class JiraCategorizeIssuesTest {
 
     static JiraTasks jiraTasks;
 
@@ -21,17 +24,9 @@ public class JiraTests {
     }
 
     @Test
-    void testLogin() {
-        boolean hasLoggedIn = jiraTasks.login();
-        Assert.assertTrue(hasLoggedIn);
+    void testComponent(){
+        int result = jiraTasks.categorizeIssues();
+        Assert.assertEquals(result, 1);
+        jiraTasks.clearCategorizeIssues();
     }
-
-    @Test
-    void testLogout() {
-        boolean hasLoggedIn = jiraTasks.logout();
-        Assert.assertTrue(hasLoggedIn);
-    }
-
-
-
 }
