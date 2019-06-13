@@ -6,13 +6,15 @@ public class JiraTests {
 
     static JiraTasks jiraTasks;
 
-    @BeforeAll
-    static void init() {
+    @BeforeEach
+    void newDriver(){
         jiraTasks = new JiraTasks();
+        jiraTasks.login();
     }
 
-    @AfterAll
-    static void finish() {
+    @AfterEach
+    void finish() {
         jiraTasks.getDriver().close();
+
     }
 }
