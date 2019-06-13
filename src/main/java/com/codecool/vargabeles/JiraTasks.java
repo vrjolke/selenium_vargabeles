@@ -117,8 +117,8 @@ public class JiraTasks {
     }
 
 
-    public boolean issueIsAvailable(String issueName) {
-    public boolean editIssue() {
+
+    public boolean editIssue () {
         driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/SAND-1");
         driver.findElement(By.id("edit-issue")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit-issue-dialog")));
@@ -126,8 +126,8 @@ public class JiraTasks {
         driver.findElement(By.id("edit-issue-submit")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("aui-flag-container")));
         return driver.findElement(By.id("summary-val")).getText().equals("Test Story");
-    }
 
+    }
     public void restoreEditIssue() {
         driver.findElement(By.id("edit-issue")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit-issue-dialog")));
