@@ -1,29 +1,29 @@
 package com.codecool.vargabeles;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BrowseProjectTests extends JiraTests{
 
 
     @Test
     void testProjectIsAvailable(){
-        assertEquals(true, jiraTasks.projectIsAvailable("PP1"));
+        assertTrue(jiraTasks.projectIsAvailable("PP1"));
     }
 
     @Test
     void testCoalaProjectIsAvailable(){
-        assertEquals(true, jiraTasks.projectIsAvailable("COALA"));
+        assertTrue(jiraTasks.projectIsAvailable("COALA"));
     }
 
     @Test
     void testToucanProjectIsAvailable(){
-        assertEquals(true, jiraTasks.projectIsAvailable("JETI"));
+        assertTrue(jiraTasks.projectIsAvailable("JETI"));
     }
 
     @Test
     void testJetiProjectIsAvailable(){
-        assertEquals(true, jiraTasks.projectIsAvailable("TOUCAN"));
+        assertTrue(jiraTasks.projectIsAvailable("TOUCAN"));
     }
 
 }

@@ -154,6 +154,12 @@ public class JiraTasks {
 
     }
 
+    public boolean projectIsAvailable(String projectName){
+        driver.navigate().to("https://jira.codecool.codecanvas.hu/projects/"+projectName);
+        String pageTitle = driver.getTitle();
+        return !pageTitle.contains("Project not found");
+    }
+
     boolean projectHasNIssues(String projectname, int issues) {
 //        loginIfNotLoggedIn();
         for (int i = 1; i <= issues; i++) {
