@@ -63,22 +63,19 @@ public class JiraTasks {
     }
 
     public boolean logout() {
-//        loginIfNotLoggedIn();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("header-details-user-fullname")));
         driver.findElement(By.id("header-details-user-fullname")).click();
         driver.findElement(By.id("log_out")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")));
-        return driver.findElement(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")) != null;
+        return isLoggedIn();
     }
 
     public boolean issueIsAvailable(String issueName) {
-//        loginIfNotLoggedIn();
         driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/" + issueName);
         return driver.findElement(By.id("summary-val")).isDisplayed();
     }
 
     public boolean projectHasNIssues(String projectname, int issues) {
-//        loginIfNotLoggedIn();
         for (int i = 1; i <= issues; i++) {
             boolean issueExists = issueIsAvailable(projectname + "-" + i);
             if (!issueExists) {
