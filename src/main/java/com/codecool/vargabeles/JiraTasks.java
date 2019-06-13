@@ -1,9 +1,8 @@
 package com.codecool.vargabeles;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -41,27 +40,51 @@ public class JiraTasks {
     }
 
     public boolean createIssue() {
-        //precondition
+
+        WebDriverWait wait = new WebDriverWait(JiraTasks.driver, 10);
         try {
             driver.findElement(By.id("header-details-user-fullname")).isDisplayed();
         } catch (Exception e) {
             login();
         }
-        //2
+        JiraTasks.driver.navigate().to("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
         driver.findElement(By.id("create_link")).click();
-//      expected result of step 2
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#create-issue-dialog > div.jira-dialog-heading > h2")));
+
+        WebElement dropdown = driver.findElement(By.cssSelector("#project-field"));
+        dropdown.click();
+        dropdown.sendKeys("Sandbox (SAND)");
+        dropdown.sendKeys(Keys.RETURN);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("summary")));
         try {
-            if (!driver.findElement(By.cssSelector("#create-issue-dialog > div.jira-dialog-heading > h2")).getText().equals("Create Issue")) {
-                return false;
-            }
-        } catch (NoSuchElementException e) {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        WebElement summary = driver.findElement(By.id("summary"));
+
+
+
+        summary.sendKeys("Test summary for create issue");
+
+        WebElement submitButton = driver.findElement(By.id("create-issue-submit"));
+        submitButton.click();
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".issue-created-key")));
+        } catch (Exception e) {
             return false;
         }
-        driver.findElement(By.cssSelector("#project-single-select")).click();
-        driver.findElement(By.cssSelector("#sandbox-(sand)-105")).click();
 
-        driver.findElement(By.id("summary")).sendKeys("New issue test summary");
-        driver.findElement(By.id("create-issue-submit")).click();
+        WebElement popUpLink = driver.findElement(By.cssSelector(".issue-created-key"));
+        popUpLink.click();
+
+
+        driver.findElement(By.id("opsbar-operations_more")).click();
+        driver.findElement(By.cssSelector("aui-item-link[title=\"Delete this issue\"]")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("delete-issue-submit")));
+        driver.findElement(By.id("delete-issue-submit")).click();
+
         return true;
 
 

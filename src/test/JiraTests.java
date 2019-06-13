@@ -16,10 +16,10 @@ public class JiraTests {
     }
 
 
-    @AfterAll
-    static void finish() {
-        JiraTasks.driver.close();
-    }
+//    @AfterAll
+////    static void finish() {
+////        JiraTasks.driver.close();
+////    }
 
     @Test
     void testLogin() {
