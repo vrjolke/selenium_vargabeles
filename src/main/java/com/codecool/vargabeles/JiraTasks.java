@@ -74,6 +74,35 @@ public class JiraTasks {
         return driver.findElement(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")) != null;
     }
 
+    public boolean editIssue() {
+        driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/SAND-1");
+        driver.findElement(By.id("edit-issue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit-issue-dialog")));
+        driver.findElement(By.id("summary")).sendKeys("Test Story");
+        driver.findElement(By.id("edit-issue-submit")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("aui-flag-container")));
+        return driver.findElement(By.id("summary-val")).getText().equals("Test Story");
+    }
+
+    public void restoreEditIssue() {
+        driver.findElement(By.id("edit-issue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit-issue-dialog")));
+        driver.findElement(By.id("summary")).sendKeys("Story");
+        driver.findElement(By.id("edit-issue-submit")).click();
+    }
+
+    public boolean editIssueOnTheIssuePage(String issueType) {
+        driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/SAND-25");
+        driver.findElement(By.id("type-val")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("issuetype-single-select")));
+        driver.findElement(By.id("issuetype-single-select")).click();
+        driver.findElement(By.id(issueType)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"issuetype-form\"]/div[2]/button[1]/span")));
+        driver.findElement(By.xpath("//*[@id=\"issuetype-form\"]/div[2]/button[1]/span")).click();
+        return driver.findElement(By.id("type-val")).isDisplayed();
+    }
+
+
     boolean issueIsAvailable(String issueName) {
 //        loginIfNotLoggedIn();
         driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/" + issueName);
