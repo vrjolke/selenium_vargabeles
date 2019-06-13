@@ -38,4 +38,14 @@ public class LoginTests extends JiraTests{
 
         assertEquals("Sorry, your username and password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
     }
+
+    @Test
+    void testLoginWithNotExistingUser(){
+        if (jiraTasks.isLoggedIn()) {
+            jiraTasks.logout();
+        }
+        jiraTasks.loginWithWrongCredentials("assssaaa", System.getenv("password"));
+
+        assertEquals("Sorry, your username and password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
+    }
 }
