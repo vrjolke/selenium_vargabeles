@@ -147,9 +147,14 @@ public class JiraTasks {
 
 
     boolean issueIsAvailable(String issueName) {
-//        loginIfNotLoggedIn();
-            driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/" + issueName);
-            return driver.findElement(By.id("summary-val")).isDisplayed();
+        driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/" + issueName);
+        try{
+            driver.findElement(By.id("summary-val")).isDisplayed();
+        }
+        catch (Exception e){
+            return false;
+        }
+        return true;
 
     }
 
