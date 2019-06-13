@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="selenium_vargabeles" />
         <module name="jira_testing_vargabeles" />
         <module name="selenium" />
       </profile>
