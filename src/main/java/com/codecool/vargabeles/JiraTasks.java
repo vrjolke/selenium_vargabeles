@@ -64,12 +64,11 @@ public class JiraTasks {
     }
 
     boolean logout() {
-//        loginIfNotLoggedIn();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("header-details-user-fullname")));
         driver.findElement(By.id("header-details-user-fullname")).click();
         driver.findElement(By.id("log_out")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")));
-        return driver.findElement(By.xpath("//*[@id=\"content\"]/div/div/section/div/div/p[2]/a")) != null;
+        return isLoggedIn();
     }
 
     public boolean createIssue() {
