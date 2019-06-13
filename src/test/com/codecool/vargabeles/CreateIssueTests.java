@@ -1,3 +1,5 @@
+package com.codecool.vargabeles;
+
 import com.codecool.vargabeles.JiraTasks;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
@@ -6,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
-public class JiraTests {
+public class CreateIssueTests {
 
     static JiraTasks jiraTasks;
 
