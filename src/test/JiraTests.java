@@ -1,12 +1,9 @@
 import com.codecool.vargabeles.JiraTasks;
-import org.junit.Assert;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
+
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterAll;
 
-
-public class JiraTests {
+class JiraTests {
 
     static JiraTasks jiraTasks;
 
@@ -15,31 +12,8 @@ public class JiraTests {
         jiraTasks = new JiraTasks();
     }
 
-
     @AfterAll
     static void finish() {
         jiraTasks.getDriver().close();
     }
-
-    /*@Test
-    void testLogin() {
-        boolean hasLoggedIn = jiraTasks.login();
-        Assert.assertTrue(hasLoggedIn);
-    }
-
-
-    @Test
-    void testLogout() {
-        boolean hasLoggedIn = jiraTasks.logout();
-        Assert.assertTrue(hasLoggedIn);
-    }*/
-
-    @Test
-    void testCreateNewVersion() throws InterruptedException {
-        boolean versionIsCreated = jiraTasks.createNewVersion();
-        Assert.assertTrue(versionIsCreated);
-    }
-
-
-
 }
