@@ -24,13 +24,12 @@ class PermissionsWithGlassTest {
 
     @Test
     void checkPermissions() throws InterruptedException {
-        assertEquals(permissionsWithGlass.checkPermissions(), 3);
+        assertEquals(permissionsWithGlass.checkPermissions().size(), 3);
     }
 
     @Test
     void checkPermissionsWithGlass() throws InterruptedException {
-        assertEquals(permissionsWithGlass.checkPermissions(), 3);
-
+        assertEquals(permissionsWithGlass.checkPermissions().size(), 3);
     }
 
     @Test

@@ -25,7 +25,7 @@ class LoginTests extends JiraTests{
 
         jiraTasks.loginWithWrongCredentials("", "");
 
-        assertEquals("Sorry, your username or password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
+        assertEquals("Sorry, your username and password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
     }
 
     @Test
@@ -35,6 +35,6 @@ class LoginTests extends JiraTests{
         }
         jiraTasks.loginWithWrongCredentials(System.getenv("username"), "asd");
 
-        assertEquals("Sorry, your username or password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
+        assertEquals("Sorry, your username and password are incorrect - please try again.", jiraTasks.getDriver().findElement(By.xpath("//*[@id=\"usernameerror\"]/p")).getText());
     }
 }
