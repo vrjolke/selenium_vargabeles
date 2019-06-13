@@ -12,9 +12,6 @@ public class JiraTasks {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public WebDriverWait getWait() {
-        return wait;
-    }
 
     public WebDriver getDriver() {
         return driver;
@@ -25,6 +22,23 @@ public class JiraTasks {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 5);
+    }
+
+    public boolean isLoggedIn(){
+        try{
+            driver.findElement(By.id("header-details-user-fullname")).isDisplayed();
+        }catch(NoSuchElementException e){
+            return false;
+        }
+        return true;
+    }
+
+    public void loginIfNotLoggedIn() {
+        try {
+            driver.findElement(By.id("header-details-user-fullname")).isDisplayed();
+        } catch (Exception e) {
+            login();
+        }
     }
 
     public boolean login() {
@@ -38,24 +52,15 @@ public class JiraTasks {
         return isLoggedIn();
     }
 
-    public boolean loginWithEmptyCredentials(){
+    public boolean loginWithWrongCredentials(String username, String password){
         driver.navigate().to("https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-username")));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-password")));
-        driver.findElement(By.id("login-form-username")).sendKeys("");
-        driver.findElement(By.id("login-form-password")).sendKeys("");
+        driver.findElement(By.id("login-form-username")).sendKeys(username);
+        driver.findElement(By.id("login-form-password")).sendKeys(password);
         driver.findElement(By.id("login")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"usernameerror\"]/p")));
         return isLoggedIn();
-    }
-
-    public boolean isLoggedIn(){
-        try{
-            driver.findElement(By.id("header-details-user-fullname")).isDisplayed();
-        }catch(NoSuchElementException e){
-            return false;
-        }
-        return true;
     }
 
     public boolean logout() {
@@ -71,14 +76,6 @@ public class JiraTasks {
         loginIfNotLoggedIn();
         driver.navigate().to("https://jira.codecool.codecanvas.hu/browse/" + issueName);
         return driver.findElement(By.id("summary-val")).isDisplayed();
-    }
-
-    private void loginIfNotLoggedIn() {
-        try {
-            driver.findElement(By.id("header-details-user-fullname")).isDisplayed();
-        } catch (Exception e) {
-            login();
-        }
     }
 
     public boolean projectHasNIssues(String projectname, int issues) {
